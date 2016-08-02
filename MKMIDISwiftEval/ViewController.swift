@@ -16,17 +16,6 @@ class ViewController: UIViewController {
  
     override func viewDidLoad() {
         super.viewDidLoad()
-        do {
-            let _ = try sequencer.addTrack()
-            let track = sequencer.tracks[0]
-            let note1 = MIKMIDINoteEvent(timeStamp: 0.0,note:60,velocity:100,duration:5,channel:0)
-            let note2 = MIKMIDINoteEvent(timeStamp: 0.0,note:63,velocity:100,duration:5,channel:0)
-            track.addEvents([note1!,note2!])
-            
-        } catch {
-            
-        }
-        
         
     }
 
@@ -34,6 +23,8 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    
     
     //MARK: UI Action Handlers
     @IBAction func playMIDI(sender: AnyObject) {
@@ -55,6 +46,21 @@ class ViewController: UIViewController {
     }
 
 
+    @IBAction func playMIDISequence(sender: AnyObject) {
+        
+        do {
+            
+            let _ = try sequencer.addTrack()
+            let track = sequencer.tracks[0]
+            let note1 = MIKMIDINoteEvent(timeStamp: 0.0,note:60,velocity:100,duration:5,channel:0)
+            let note2 = MIKMIDINoteEvent(timeStamp: 0.0,note:63,velocity:100,duration:5,channel:0)
+            track.addEvents([note1!,note2!])
+            print(track)
+        } catch {
+            
+        }
+
+    }
 
 }
 
